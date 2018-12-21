@@ -34,22 +34,23 @@ mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function (req, res) {
     // First, we grab the body of the html with axios
-    axios.get("https://www.3m.com/3M/en_US/company-us/all-3m-products/~/All-3M-Products/?N=5002385+8711017+3294857497&rt=r3#pBus").then(function (response) {
+    axios.get("https://www.3m.com/3M/en_US/company-us/all-3m-products/~/All-3M-Products/?N=5002385+8711017+3294857497&rt=r3").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(response.data);
 
         // Now, we grab every h2 within an article tag, and do the following:
-        $("article h2").each(function (i, element) {
+        $(".MMM--tileLayout-col").each(function (i, element) {
             // Save an empty result object
             var result = {};
+            console.log($(this).find("img").attr("src"));
 
             // Add the text and href of every link, and save them as properties of the result object
-            result.title = $(this)
-                .children("a")
-                .text();
-            result.link = $(this)
-                .children("a")
-                .attr("href");
+            result.title = $(this).find("span").text();
+                
+            result.link = $(this).find("a").attr("href");
+                
+            result.img = $(this).find("img").attr("src");
+                
 
             // Create a new Article using the `result` object built from scraping
             db.Article.create(result)
