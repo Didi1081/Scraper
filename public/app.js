@@ -3,7 +3,7 @@ $.getJSON("/articles", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<div> <img src='" + data[i].img + "'>" + "<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p><button id = 'save'> Save Article </button></div>"
+      $("#articles").append("<div> <img src='" + data[i].img + "'>" + "<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p><button data-id="+ data[i]._id +" class=save> Save Article </button></div>"
       );
 
     }
@@ -43,6 +43,15 @@ $.getJSON("/articles", function(data) {
         }
       });
   });
+
+
+  $(document).on('click', '.save', function(){
+    var id = { _id: $(this).attr('data-id')}
+    console.log(id);
+    $.post('/save', id, function(data){
+        console.log(data, "this is the data");
+    })
+  })
   
   // When you click the savenote button
   $(document).on("click", "#savenote", function() {

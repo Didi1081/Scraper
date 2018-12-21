@@ -7,6 +7,7 @@ var mongoose = require("mongoose");
 // It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
+var path = require("path");
 
 // Require all models
 var db = require("./models");
@@ -118,6 +119,26 @@ app.post("/articles/:id", function (req, res) {
             res.json(err);
         });
 });
+
+app.get('/viewSaved', function(req, res){
+    res.sendFile(path.join(__dirname + '/public/saved.html'))
+})
+app.get('/saved', function(req, res){
+    db.Article.find({saved: true}).then(result => res.send(result));
+})
+app.post('/save', function(req, res){
+    console.log(req.body);
+    db.Article.findByIdAndUpdate( req.body._id, {saved: true})
+    .then(result => res.send("saved"));
+ 
+})
+
+app.post('/delete', function(req, res){
+    console.log(req.body);
+    db.Article.findByIdAndUpdate( req.body._id, {saved: false})
+    .then(result => res.send("saved"));
+ 
+})
 
 // Start the server
 app.listen(PORT, function () {

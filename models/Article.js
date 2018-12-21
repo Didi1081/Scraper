@@ -14,14 +14,19 @@ var ArticleSchema = new Schema({
   // `link` is required and of type String
   link: {
     type: String,
-    required: true
+  
     
   },
 
 // `link` is required and of type String
 img: {
   type: String,
-  required: true
+ 
+},
+
+saved: {
+  type: Boolean,
+  default: false
 },
 
 
