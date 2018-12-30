@@ -48,8 +48,9 @@ app.get('/', function(req, res){
 
 // // A GET route for scraping the echoJS website
 app.get("/scrape", function (req, res) {
+    console.log("In scrape")
     // First, we grab the body of the html with axios
-    axios.get("https://www.3m.com/3M/en_US/company-us/all-3m-products/~/All-3M-Products/?N=5002385+8711017+3294857497&rt=r3").then(function (response) {
+    axios.get("http://www.3m.com/3M/en_US/company-us/all-3m-products/~/All-3M-Products/?N=5002385+8711017+3294857497&rt=r3").then(function (response) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(response.data);
 
