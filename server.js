@@ -31,12 +31,12 @@ app.use(express.static("public"));
 //mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
 //mongoose.connect("mongodb://heroku_z9g7j40t:t2h3gs239mqn0rr7a4q5icc8n9@ds139934.mlab.com:39934/heroku_z9g7j40t");
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/unit18Populater";
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/unit18Populater";
 
-mongoose.connect(MONGODB_URI, function(err) {
-    if (err) throw err;
-    console.log('Database connected')
-});
+// mongoose.connect(MONGODB_URI, function(err) {
+//     if (err) throw err;
+//     console.log('Database connected')
+// });
 
 
 // Routes
